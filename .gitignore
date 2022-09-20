@@ -1,0 +1,9 @@
+# typing
+.mypy_cache/
+
+# database
+*.sqlite3
+/**/migrations/
+
+# cache
+/**/__pycache__/
