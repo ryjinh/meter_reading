@@ -73,10 +73,12 @@ API has two basic endpoints
 
 ```bash
 pipenv install # alternatively, you install dependencies from requirements.txt
-make setup # will handle migrations and start createsuperuser flow
+make setup # will handle migrations, db seed and start createsuperuser flow
 # username will be 'admin' and you will be prompted for password
 python3 manage.py runserver
 ```
+
+- Database will be seeded with data from example flow file, so should be ready for you to check out after above steps completed!
 
 File Processor
 
