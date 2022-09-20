@@ -3,10 +3,9 @@
 
 # database
 *.sqlite3
-/**/migrations/
 
 # cache
 /**/__pycache__/
 
 # misc
-.tarignore
+*.tar*

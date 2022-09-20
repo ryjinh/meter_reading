@@ -71,10 +71,10 @@ API has two basic endpoints
 
 ## How to run the application
 
-Nothing special here, just like a basic Django application :)
-
 ```bash
-python3 manage.py makemigrations api && python manage.py migrate
+pipenv install # alternatively, you install dependencies from requirements.txt
+make setup # will handle migrations and start createsuperuser flow
+# username will be 'admin' and you will be prompted for password
 python3 manage.py runserver
 ```
 
