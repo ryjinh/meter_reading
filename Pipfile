@@ -6,10 +6,12 @@ name = "pypi"
 [packages]
 django = "*"
 pytz = "*"
+requests = "*"
 
 [dev-packages]
 mypy = "*"
 types-pytz = "*"
+types-requests = "*"
 
 [requires]
 python_version = "3.10"
