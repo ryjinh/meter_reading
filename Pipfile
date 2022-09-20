@@ -5,9 +5,11 @@ name = "pypi"
 
 [packages]
 django = "*"
+pytz = "*"
 
 [dev-packages]
 mypy = "*"
+types-pytz = "*"
 
 [requires]
 python_version = "3.10"

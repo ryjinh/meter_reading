@@ -80,7 +80,7 @@ class Mpan(models.Model):
         max_length=13, unique=True, db_index=True, primary_key=True
     )
     validation_status = models.CharField(
-        max_length=128, choices=VALIDATION_STATUS_CHOICES
+        max_length=128, null=True, choices=VALIDATION_STATUS_CHOICES
     )
 
     def __str__(self) -> str:
@@ -90,7 +90,7 @@ class Mpan(models.Model):
 class Meter(models.Model):
     mpan_core = models.ForeignKey(to=Mpan, on_delete=models.CASCADE)
     id = models.CharField(max_length=10, unique=True, primary_key=True, db_index=True)
-    reading_type = models.CharField(max_length=128, choices=READING_TYPE_CHOICES)
+    reading_type = models.CharField(max_length=128, null=True, choices=READING_TYPE_CHOICES)
 
     def __str__(self) -> str:
         return f"{self.id}"
@@ -154,16 +154,21 @@ class ReadingJson(models.QuerySet):
 
 class Reading(models.Model):
     objects = ReadingJson.as_manager()
-
     register_id = models.CharField(max_length=128, null=True)
     mpan_core = models.ForeignKey(to=Mpan, on_delete=models.CASCADE)
     meter_id = models.ForeignKey(to=Meter, on_delete=models.CASCADE)
     reading_value = models.DecimalField(decimal_places=1, max_digits=10)
     reading_taken_at = models.DateTimeField(null=True, auto_now=False)
-    reading_flag = models.CharField(max_length=128, choices=READING_FLAG_CHOICES)
+    reading_flag = models.CharField(max_length=128, null=True, choices=READING_FLAG_CHOICES)
     reading_method = models.CharField(
         max_length=128, null=True, choices=READING_METHOD_CHOICES
     )
+    file_name = models.CharField(max_length=128, null=True)
+
+    class Meta:
+        # avoids creating duplicate reading entries in database
+        # when files are processed by management command.
+        unique_together=("mpan_core", "register_id", "reading_taken_at")
 
     def __str__(self) -> str:
         return f"{self.register_id}"
