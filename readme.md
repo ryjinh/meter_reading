@@ -1,6 +1,7 @@
 # Flow File Processor
 
 ## Overview
+
 Django application with a very basic API implementation, which allows users to process D0010 flow files, view and filter their contents within the Django Admin page, and allows meter reading data to be accessed via HTTP request.
 
 ## Features
@@ -76,6 +77,14 @@ Nothing special here, just like a basic Django application :)
 python3 manage.py makemigrations api && python manage.py migrate
 python3 manage.py runserver
 ```
+
+File Processor
+
+```bash
+python manage.py file_processor meter_reading/resources/flow_files
+```
+
+- above runs flow file processing on a directory of files, but individual files within the `flow_files` folder may also be specified
 
 Tests
 
