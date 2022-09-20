@@ -29,6 +29,8 @@ class Command(base.BaseCommand):
     def handle(self, **options):
         """executes management command"""
         path = options["path"][0]
+        # If argument provided does not match regex, then it
+        # is a directory and files are looped through and process
         if not re.search(FILE_REGEX, path):
             for f in os.listdir(path):
                 file = os.path.join("meter_reading/resources/flow_files/", f)
@@ -52,6 +54,9 @@ class Command(base.BaseCommand):
         Parses a flow file (or directory of flow files) and creates records in the databases.
         """
         with open(path) as f:
+            # assumption here is that all flow files are headered
+            # with the "ZHV" line, but implementation could be changed
+            # to simply start processing when coming across first MPAN
             if not f.readline().startswith("ZHV"):
                 raise InvalidFileFormat(
                     "File format appears to be incorrect. "

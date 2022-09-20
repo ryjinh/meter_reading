@@ -99,20 +99,16 @@ class Meter(models.Model):
 class ReadingJson(models.QuerySet):
     """JSON serialization logic for Reading model"""
 
-    def get_all_readings(self) -> list:
-        return [
-            i["fields"] for i in json.loads(serializers.serialize("json", self.all()))
-        ]
-
     def get_for_mpan(self, mpan_core: str) -> list:
+        """Gets all meter readings for an MPAN"""
         return [
             i["fields"]
             for i in json.loads(
                 serializers.serialize("json", self.filter(mpan_core=mpan_core))
             )
         ]
-
     def get_for_mpan_after(self, mpan_core: str, start_date: datetime) -> list:
+        """Gets all meter readings for an mpan after `start_date`"""
         return [
             i["fields"]
             for i in json.loads(
@@ -124,6 +120,7 @@ class ReadingJson(models.QuerySet):
         ]
 
     def get_for_mpan_before(self, mpan_core: str, end_date: datetime) -> list:
+        """Gets all meter readings for an mpan before `end date`"""
         return [
             i["fields"]
             for i in json.loads(
@@ -137,6 +134,7 @@ class ReadingJson(models.QuerySet):
     def get_for_mpan_between(
         self, mpan_core: str, start_date: datetime, end_date: datetime
     ) -> list:
+        """Gets all meter readings for an mpan between `start_date` and `end_date`"""
         return [
             i["fields"]
             for i in json.loads(
@@ -150,7 +148,6 @@ class ReadingJson(models.QuerySet):
                 )
             )
         ]
-
 
 class Reading(models.Model):
     objects = ReadingJson.as_manager()
