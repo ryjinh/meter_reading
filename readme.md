@@ -2,7 +2,7 @@
 
 ## Overview
 
-Django application with a very basic API implementation, which allows users to process D0010 flow files, view and filter their contents within the Django Admin page, and allows meter reading data to be accessed via HTTP request.
+Django application with a very basic API implementation, which allows users to process D0010 electricity flow files, view and filter their contents within the Django Admin page, and allows meter reading data to be accessed via HTTP request.
 
 ## Features
 
