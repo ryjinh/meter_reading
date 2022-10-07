@@ -93,10 +93,3 @@ Tests
 ```bash
 python3 manage.py test
 ```
-
-### Notes
-
-I understand that a few things (including things I may fail to mention here 😅) may raise some questions, so I've added some explanation below:
-
-- `api.models.ReadingJson` >> I know that it is not idiomatic at all in Django to use a custom queryset in order to seralise to JSON, my intention here was just to use as few third-party libraries as possible (i.e. Django REST Framework)
-- **Tests** >> still developing in this area, and one of the reasons I'm interested in working with a larger team, including more senior engineers, is so I can learn how to write more meaningful tests and grow as a developer 😁
